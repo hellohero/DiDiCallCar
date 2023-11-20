@@ -3,6 +3,7 @@ package com.tantuo.didicar.DriverLicenseRecognition;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import io.github.pixee.security.BoundedLineReader;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -93,7 +94,7 @@ public class DigitImageProcessor {
             if (f.exists()) {
                 BufferedReader br = new BufferedReader(new FileReader(f));
                 for (int i = 0; i < 40; i++) {
-                    float currVal = Float.parseFloat(br.readLine());
+                    float currVal = Float.parseFloat(BoundedLineReader.readLine(br, 5_000_000));
                     fv[i] = currVal;
                 }
             }
