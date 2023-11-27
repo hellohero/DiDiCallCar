@@ -8,6 +8,8 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.Toast;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,7 +59,7 @@ public class MyImageView extends ImageView {
             public void run() {
                 try {
                     //把传过来的路径转成URL
-                    URL url = new URL(path);
+                    URL url = Urls.create(path, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     //获取连接
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     //使用GET方法访问网络
