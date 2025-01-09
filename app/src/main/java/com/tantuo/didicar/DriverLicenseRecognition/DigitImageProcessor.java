@@ -3,6 +3,7 @@ package com.tantuo.didicar.DriverLicenseRecognition;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import java.nio.file.Files;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
@@ -117,7 +118,7 @@ public class DigitImageProcessor {
                 file.delete();
             }
             if (file.createNewFile()) {
-                PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+                PrintWriter pw = new PrintWriter(Files.newBufferedWriter(file.toPath()));
                 for (int k = 0; k < fv.length; k++) {
                     pw.println(String.valueOf(fv[k]));
                 }
